@@ -34,4 +34,10 @@ router.get("/add", (req, res, next) => {
   // res.send('GET /wiki/add');  WORKS
 });
 
+// For each added wiki-page
+router.get("/:slug", (req, res, next) => {
+  res.send(`hit dynamic route at ${req.params.slug}`);
+  // res.send('GET /wiki/add');  WORKS
+});
+
 module.exports = router;
