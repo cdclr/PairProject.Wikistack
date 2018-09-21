@@ -36,10 +36,14 @@ app.get("/", (req, res) => {
   res.send(layout("Hello Khalid"));
 });
 
-// - LISTEN -
-const port = 3005;
-app.listen(port, () => {
-  console.log(
-    `Khalid, Christian, your app isn't broken anymore here on ${port}.`
-  );
-});
+// .sync and .listen work inside init
+const init = async () => {
+  await db.sync();
+  const port = 3005;
+  app.listen(port, () => {
+    console.log(
+      `Khalid, Christian, your app isn't broken anymore here on ${port}.`
+    );
+  });
+}
+init();
