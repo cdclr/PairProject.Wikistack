@@ -5,9 +5,12 @@ const morgan = require("morgan");
 // Var declarations for later use
 const layout = require("./views/layout");
 const { db } = require("./models");
+const wikiRouter = require('./routes/wiki.js');
+const userRouter = require('./routes/user.js');
 
 // Initializing express
 const app = express();
+// Route-handling
 
 // middleware handler
 app.use(morgan("dev"));
@@ -28,6 +31,8 @@ db.authenticate().then(() => {
 });
 
 // --- ROUTES ---
+app.use('/wiki', wikiRouter);
+app.use('/user', userRouter);
 
 // - GETS -
 app.get("/", (req, res) => {
