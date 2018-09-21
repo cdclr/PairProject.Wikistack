@@ -1,9 +1,15 @@
-// Initialize express
+// All our required modules
 const express = require("express");
+const morgan = require("morgan");
+
+// Var declarations for later use
+const layout = require("./views/layout");
+const { db } = require("./models");
+
+// Initializing express
 const app = express();
 
 // middleware handler
-const morgan = require("morgan");
 app.use(morgan("dev"));
 
 // serve up static folders from public folder
@@ -13,10 +19,13 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: false }));
 
 // Pull details for later use (base layer)
-const layout = require("./views/layout");
 
 // Setting up db for use in stuff here
-const { db } = require("./models");
+
+// A .then command after authentication
+db.authenticate().then(() => {
+  console.log("\nYou are connected to the database...");
+});
 
 // --- ROUTES ---
 
