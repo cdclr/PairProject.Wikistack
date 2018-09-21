@@ -29,9 +29,9 @@ module.exports = () =>
     </div>
 
     <div class="form-group">
-      <label for="textarea" class="col-sm-2 control-label">Page Content</label>
+      <label for="content" class="col-sm-2 control-label">Page Content</label>
       <div class="col-sm-10">
-        <input id="textarea" name="textarea" type="text" class="form-control"/>
+        <input id="content" name="content" type="text" class="form-control"/>
       </div>
     </div>
 

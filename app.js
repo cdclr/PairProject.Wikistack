@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 // A .then command after authentication
 db.authenticate().then(() => {
   console.log(
-    "\n########### WIKISTACK ###########\nWikistack database connected.\n"
+    "\n######### WIKISTACK #########\nWikistack database connected.\n"
   );
 });
 
@@ -47,9 +47,8 @@ const init = async () => {
   await db.sync();
   const port = 3005;
   app.listen(port, () => {
-    console.log(
-      `Khalid, Christian, your app is looking better here on ${port}.`
-    );
+    console.log(`Khalid, Christian, you guys are really close; Port: ${port}.`);
   });
 };
+
 init();

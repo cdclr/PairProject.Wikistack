@@ -16,14 +16,7 @@ const Page = db.define("pages", {
   },
   slug: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isSlug(value) {
-        getSelection;
-        if (slugify(value) !== value)
-          throw new Error("Please enter a valid slug");
-      }
-    }
+    allowNull: false
   },
   content: {
     type: Sequelize.TEXT,
@@ -34,7 +27,8 @@ const Page = db.define("pages", {
   }
 });
 
-Page.beforeCreate((pageInstance, optionsObject) => {
+// Before the page submits from to create page...
+Page.beforeValidate(pageInstance => {
   // Create the slug from the title grabbed from body and passed into slugify
   pageInstance.slug = slugify(pageInstance.title);
 });
