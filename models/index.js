@@ -19,26 +19,32 @@ const Page = db.define("pages", {
     allowNull: false,
     validate: {
       isSlug(value) {
-      if (slugify(value) !== value)
-        throw new Error('Please enter a valid slug');
+        getSelection;
+        if (slugify(value) !== value)
+          throw new Error("Please enter a valid slug");
       }
     }
   },
   content: {
     type: Sequelize.TEXT,
-    allowNull: false,
+    allowNull: false
   },
-  status: { 
-    type: Sequelize.ENUM('open', 'closed')
+  status: {
+    type: Sequelize.ENUM("open", "closed")
   }
+});
+
+Page.beforeCreate((pageInstance, optionsObject) => {
+  // Create the slug from the title grabbed from body and passed into slugify
+  pageInstance.slug = slugify(pageInstance.title);
 });
 
 const User = db.define("users", {
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
-  email: { 
+  email: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -49,5 +55,7 @@ const User = db.define("users", {
 
 // export the whoooooooole db
 module.exports = {
-  db, Page, User
+  db,
+  Page,
+  User
 };

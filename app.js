@@ -5,8 +5,8 @@ const morgan = require("morgan");
 // Var declarations for later use
 const layout = require("./views/layout");
 const { db } = require("./models");
-const wikiRouter = require('./routes/wiki.js');
-const userRouter = require('./routes/user.js');
+const wikiRouter = require("./routes/wiki.js");
+const userRouter = require("./routes/user.js");
 
 // Initializing express
 const app = express();
@@ -27,18 +27,19 @@ app.use(express.urlencoded({ extended: false }));
 
 // A .then command after authentication
 db.authenticate().then(() => {
-  console.log("\nYou are connected to the database...");
+  console.log(
+    "\n########### WIKISTACK ###########\nWikistack database connected.\n"
+  );
 });
 
 // --- ROUTES ---
-app.use('/wiki', wikiRouter);
-app.use('/user', userRouter);
+app.use("/wiki", wikiRouter);
+app.use("/user", userRouter);
 
 // - GETS -
 app.get("/", (req, res) => {
-  // Testing layout by invoking layout and passing it an empty string
-  // layout("string") corresponds to ${content} in layout.js
-  res.send(layout("Hello Khalid"));
+  // redirect base to /wiki
+  res.redirect("/wiki");
 });
 
 // .sync and .listen work inside init
@@ -47,8 +48,8 @@ const init = async () => {
   const port = 3005;
   app.listen(port, () => {
     console.log(
-      `Khalid, Christian, your app isn't broken anymore here on ${port}.`
+      `Khalid, Christian, your app is looking better here on ${port}.`
     );
   });
-}
+};
 init();
